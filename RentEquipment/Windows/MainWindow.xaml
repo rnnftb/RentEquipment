@@ -1,0 +1,52 @@
+﻿<Window x:Class="RentEquipment.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RentEquipment"
+        mc:Ignorable="d"
+          Title="Главное меню" Height="450" Width="800" Background="#FF7C7C7C">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnStaffWindow"
+                Grid.Row="2"
+                Grid.Column="0"
+                Height="75"
+                Width="180"
+                Content="Список сотрудников" Click="btnStaffWindow_Click"
+            ></Button>
+        <Button x:Name="btnEquipListWindow"
+                Grid.Row="2"
+                Grid.Column="1"
+                Height="75"
+                Width="180"
+                Content="Список оборудования" Click="btnEquipListWindow_Click"
+            ></Button>
+        <Button x:Name="btnEquipExtWindow"
+                Grid.Row="2"
+                Grid.Column="2"
+                Height="75"
+                Width="180"
+                Content="Аренда" Click="btnEquipExtWindow_Click"
+            ></Button>
+        <Button x:Name="btnClientList"
+                Grid.Row="2"
+                Grid.Column="3"
+                Height="75"
+                Width="180"
+                Content="Список клиентов" Click="btnClientList_Click"
+            ></Button>
+    </Grid>
+</Window>
