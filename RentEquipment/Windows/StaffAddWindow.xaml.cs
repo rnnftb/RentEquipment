@@ -88,6 +88,7 @@ namespace RentEquipment.Windows
                 MessageBox.Show("Пароли не совпадают", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            //код
             var authUser = ClassHelper.AppData.Context.Staff.ToList().
             Where(i => i.Login == txtLogin.Text).FirstOrDefault();
             if (authUser != null && IsEdit == false)
