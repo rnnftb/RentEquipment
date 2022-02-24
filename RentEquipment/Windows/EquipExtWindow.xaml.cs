@@ -57,5 +57,12 @@ namespace RentEquipment.Windows
                 }
             }
         }
+
+        private void btnEExtWindow_Click(object sender, RoutedEventArgs e)
+        {
+            EquipExtAddWindow equipExtAddWindow = new EquipExtAddWindow();
+            equipExtAddWindow.ShowDialog();
+            this.Show();
+        }
     }
 }

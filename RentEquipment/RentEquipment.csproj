@@ -113,6 +113,9 @@
     <Compile Include="EF\Type.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\EquipExtAddWindow.xaml.cs">
+      <DependentUpon>EquipExtAddWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\StaffAddWindow.xaml.cs">
       <DependentUpon>StaffAddWindow.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\EquipAcceptWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EquipExtAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

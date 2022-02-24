@@ -117,9 +117,10 @@
                      TextChanged="txtSearch_TextChanged"
                 ></TextBox>
             <ComboBox x:Name="cmbSort"
-                Width="300"
+                      Width="300"
                       FontSize="16"
                       Margin="10"
+                      KeyDown="cmbSort_KeyDown"
                       SelectionChanged="cmbSort_SelectionChanged"  
                 ></ComboBox>
         </WrapPanel>
