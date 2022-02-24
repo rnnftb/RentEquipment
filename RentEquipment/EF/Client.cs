@@ -29,6 +29,7 @@ namespace RentEquipment.EF
         public int IDPassport { get; set; }
         public System.DateTime DateOfBirth { get; set; }
         public int IDGender { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual Gender Gender { get; set; }
         public virtual Passport Passport { get; set; }

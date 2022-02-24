@@ -19,6 +19,7 @@ namespace RentEquipment.EF
         public int IDStaff { get; set; }
         public System.DateTime DateOfIssue { get; set; }
         public int IDProduct { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Product Product { get; set; }

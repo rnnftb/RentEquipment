@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fc79800bcc2141b095de5f6d090e9c96" Name="Diagram1">
-        <EntityTypeShape EntityType="RentEquipmentModel.Client" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.ClientProduct" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.Gender" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.Passport" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.Role" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.Staff" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.Status" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.Type" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RentEquipmentModel.History" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="RentEquipmentModel.FK_Client_Gender" ManuallyRouted="false" />
-        <AssociationConnector Association="RentEquipmentModel.FK_Client_Passport" ManuallyRouted="false" />
-        <AssociationConnector Association="RentEquipmentModel.FK_ClientProduct_Client" ManuallyRouted="false" />
-        <AssociationConnector Association="RentEquipmentModel.FK_ClientProduct_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="RentEquipmentModel.FK_ClientProduct_Staff" ManuallyRouted="false" />
-        <AssociationConnector Association="RentEquipmentModel.FK_Product_Status" ManuallyRouted="false" />
-        <AssociationConnector Association="RentEquipmentModel.FK_Product_Type" ManuallyRouted="false" />
-        <AssociationConnector Association="RentEquipmentModel.FK_Staff_Role" ManuallyRouted="false" />
+      <Diagram DiagramId="fc79800bcc2141b095de5f6d090e9c96" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="RentEquipmentModel.Client" Width="1.5" PointX="3" PointY="12.875" />
+        <EntityTypeShape EntityType="RentEquipmentModel.ClientProduct" Width="1.5" PointX="5.25" PointY="1.125" />
+        <EntityTypeShape EntityType="RentEquipmentModel.Gender" Width="1.5" PointX="0.75" PointY="12.625" />
+        <EntityTypeShape EntityType="RentEquipmentModel.Passport" Width="1.5" PointX="0.75" PointY="15" />
+        <EntityTypeShape EntityType="RentEquipmentModel.Product" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="RentEquipmentModel.Role" Width="1.5" PointX="0.75" PointY="9.375" />
+        <EntityTypeShape EntityType="RentEquipmentModel.Staff" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="RentEquipmentModel.Status" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="RentEquipmentModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RentEquipmentModel.Type" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="RentEquipmentModel.History" Width="1.5" PointX="4.75" PointY="4.75" />
+        <AssociationConnector Association="RentEquipmentModel.FK_Client_Gender" />
+        <AssociationConnector Association="RentEquipmentModel.FK_Client_Passport" />
+        <AssociationConnector Association="RentEquipmentModel.FK_ClientProduct_Client" />
+        <AssociationConnector Association="RentEquipmentModel.FK_ClientProduct_Product" />
+        <AssociationConnector Association="RentEquipmentModel.FK_ClientProduct_Staff" />
+        <AssociationConnector Association="RentEquipmentModel.FK_Product_Status" />
+        <AssociationConnector Association="RentEquipmentModel.FK_Product_Type" />
+        <AssociationConnector Association="RentEquipmentModel.FK_Staff_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

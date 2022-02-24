@@ -52,7 +52,8 @@ namespace RentEquipment.Windows
             i.MiddleName.ToLower().Contains(txtSearch.Text.ToLower()) ||
             i.FIO.ToLower().Contains(txtSearch.Text.ToLower()) ||
             i.Phone.ToLower().Contains(txtSearch.Text.ToLower()) ||
-            i.Email.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
+            i.Email.ToLower().Contains(txtSearch.Text.ToLower()) ||
+            i.IsDeleted == false).ToList();
             switch (cmbSort.SelectedIndex)
             {
                 case 0:
@@ -106,7 +107,8 @@ namespace RentEquipment.Windows
                             return;
                         }
                         var stf = lvStaff.SelectedItem as EF.Staff;
-                        ClassHelper.AppData.Context.Staff.Remove(stf);
+                        stf.IsDeleted = true;
+                        //ClassHelper.AppData.Context.Staff.Remove(stf);
                         ClassHelper.AppData.Context.SaveChanges();
                         MessageBox.Show("Пользователь успешно удален", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
                         Filter();
