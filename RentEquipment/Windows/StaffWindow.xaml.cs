@@ -44,7 +44,7 @@ namespace RentEquipment.Windows
         private void Filter()
         {
             List<EF.Staff> ListStaff = new List<EF.Staff>();
-            ListStaff = ClassHelper.AppData.Context.Staff.ToList();
+            ListStaff = ClassHelper.AppData.Context.Staff.Where(i => i.IsDeleted == false).ToList();
             //Фильтрация
             ListStaff = ListStaff.Where(i =>
             i.LastName.ToLower().Contains(txtSearch.Text.ToLower()) ||
@@ -52,8 +52,8 @@ namespace RentEquipment.Windows
             i.MiddleName.ToLower().Contains(txtSearch.Text.ToLower()) ||
             i.FIO.ToLower().Contains(txtSearch.Text.ToLower()) ||
             i.Phone.ToLower().Contains(txtSearch.Text.ToLower()) ||
-            i.Email.ToLower().Contains(txtSearch.Text.ToLower()) ||
-            i.IsDeleted == false).ToList();
+            i.Email.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
+
             switch (cmbSort.SelectedIndex)
             {
                 case 0:
