@@ -27,7 +27,7 @@ namespace RentEquipment.Windows
         private void Filter()
         {
             List<EF.Client> ListClient = new List<EF.Client>();
-            ListClient = ClassHelper.AppData.Context.Client.ToList();
+            ListClient = ClassHelper.AppData.Context.Client.Where(i => i.IsDeleted == false).ToList();
             lvClientList.ItemsSource = ListClient;
         }
 
@@ -45,7 +45,8 @@ namespace RentEquipment.Windows
                             return;
                         }
                         var stf = lvClientList.SelectedItem as EF.Client;
-                        ClassHelper.AppData.Context.Client.Remove(stf);
+                        //ClassHelper.AppData.Context.Client.Remove(stf);
+                        stf.IsDeleted = true;
                         ClassHelper.AppData.Context.SaveChanges();
                         MessageBox.Show("Пользователь успешно удален", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
                         Filter();
