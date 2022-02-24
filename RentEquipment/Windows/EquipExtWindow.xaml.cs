@@ -63,6 +63,7 @@ namespace RentEquipment.Windows
             EquipExtAddWindow equipExtAddWindow = new EquipExtAddWindow();
             equipExtAddWindow.ShowDialog();
             this.Show();
+            Filter();
         }
     }
 }

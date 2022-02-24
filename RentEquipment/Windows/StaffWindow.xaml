@@ -120,7 +120,6 @@
                       Width="300"
                       FontSize="16"
                       Margin="10"
-                      KeyDown="cmbSort_KeyDown"
                       SelectionChanged="cmbSort_SelectionChanged"  
                 ></ComboBox>
         </WrapPanel>
