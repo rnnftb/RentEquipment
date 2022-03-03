@@ -94,6 +94,7 @@
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -378,7 +379,7 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="Staff" EntitySet="Staff" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ID" />
@@ -465,6 +466,7 @@
           <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="ClientProduct" Relationship="RentEquipmentModel.FK_ClientProduct_Staff" FromRole="Staff" ToRole="ClientProduct" />
           <NavigationProperty Name="Role" Relationship="RentEquipmentModel.FK_Staff_Role" FromRole="Staff" ToRole="Role" />
         </EntityType>
@@ -604,7 +606,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -686,6 +688,7 @@
           <EntitySetMapping Name="Staff">
             <EntityTypeMapping TypeName="RentEquipmentModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
@@ -738,7 +741,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
