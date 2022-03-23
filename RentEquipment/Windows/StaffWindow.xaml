@@ -107,6 +107,9 @@
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
+                            <Image 
+                                Grid.RowSpan="3"
+                                Source="/Res/pzqL31fLlco.jpg"></Image>
                             <Image x:Name="PhotoStaff"
                        Grid.RowSpan="3"  
                        Margin="10">
@@ -115,9 +118,7 @@
                                     </Binding>
                                 </Image.Source>
                             </Image>
-                            <Image 
-                                Grid.RowSpan="3"
-                                Source="/Res/pzqL31fLlco.jpg"></Image>
+                           
 
                             <TextBlock
                     Text="{Binding LastName}"

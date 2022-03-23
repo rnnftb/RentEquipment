@@ -12,6 +12,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using System.IO;
 
 namespace RentEquipment.Windows
 {
@@ -22,6 +24,7 @@ namespace RentEquipment.Windows
     {
         private bool IsEdit = false;
         EF.Staff editStaff = new EF.Staff();
+        string photostrl;
         public StaffAddWindow()
         {
             InitializeComponent();
@@ -47,6 +50,19 @@ namespace RentEquipment.Windows
             txtPassword.Text = staff.Password;
             cmbRole.SelectedIndex = staff.IDRole-1;
             editStaff = staff;
+            if(staff.Photo != null)
+            {
+            using (MemoryStream stream = new MemoryStream(staff.Photo))
+            {
+                    BitmapImage bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    bitmapImage.StreamSource = stream;
+                    bitmapImage.EndInit();
+                    PhotoUser.Source = bitmapImage;
+            }
+            }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -129,6 +145,10 @@ namespace RentEquipment.Windows
                    editStaff.IDRole = (cmbRole.SelectedItem as EF.Role).ID;
                    editStaff.Login = txtLogin.Text;
                    editStaff.Password = txtPassword.Text;
+                   if(photostrl != null)
+                   {
+                       editStaff.Photo = File.ReadAllBytes(photostrl);
+                   }
                    ClassHelper.AppData.Context.SaveChanges();
                    MessageBox.Show("Пользователь изменен");
                    this.Close();
@@ -169,6 +189,16 @@ namespace RentEquipment.Windows
             //доб
 
            
+        }
+
+        private void btnPhoto_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            if (openFile.ShowDialog() == true)
+            {
+                PhotoUser.Source = new BitmapImage(new Uri(openFile.FileName));
+                photostrl = openFile.FileName;
+            }
         }
     }
 }
