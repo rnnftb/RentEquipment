@@ -126,7 +126,7 @@
                     Foreground="AntiqueWhite"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
-                    Margin="10"
+                    Margin="5"
                     Grid.Column="1"
                     Grid.Row="0"
                     ></TextBlock>
@@ -136,7 +136,7 @@
                                 Foreground="AntiqueWhite"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
-                    Margin="10"
+                    Margin="5"
                     Grid.Column="1"
                     Grid.Row="1"
                     ></TextBlock>
@@ -146,7 +146,7 @@
                                 Foreground="AntiqueWhite"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
-                    Margin="10"
+                    Margin="5"
                     Grid.Column="1"
                     Grid.Row="2"
                     ></TextBlock>

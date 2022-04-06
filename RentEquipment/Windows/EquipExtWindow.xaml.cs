@@ -44,8 +44,8 @@ namespace RentEquipment.Windows
                         {
                             return;
                         }
-                        var stf = lvEquipExt.SelectedItem as EF.ClientProduct;
-                        stf.IsDeleted = true;
+                        var clteqp = lvEquipExt.SelectedItem as EF.ClientProduct;
+                        clteqp.IsDeleted = true;
                         ClassHelper.AppData.Context.SaveChanges();
                         MessageBox.Show("Запись успешно удалена", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
                         Filter();
@@ -60,8 +60,8 @@ namespace RentEquipment.Windows
 
         private void btnEExtWindow_Click(object sender, RoutedEventArgs e)
         {
-            EquipExtAddWindow equipExtAddWindow = new EquipExtAddWindow();
-            equipExtAddWindow.ShowDialog();
+            AddEquipExtWindow addEquipExtWindow = new AddEquipExtWindow();
+            addEquipExtWindow.ShowDialog();
             this.Show();
             Filter();
         }

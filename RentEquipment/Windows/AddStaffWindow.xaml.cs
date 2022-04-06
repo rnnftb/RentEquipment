@@ -20,12 +20,12 @@ namespace RentEquipment.Windows
     /// <summary>
     /// Логика взаимодействия для StaffAddWindow.xaml
     /// </summary>
-    public partial class StaffAddWindow : Window
+    public partial class AddStaffWindow : Window
     {
         private bool IsEdit = false;
         EF.Staff editStaff = new EF.Staff();
         string photostrl;
-        public StaffAddWindow()
+        public AddStaffWindow()
         {
             InitializeComponent();
             cmbRole.ItemsSource = ClassHelper.AppData.Context.Role.ToList();
@@ -33,7 +33,7 @@ namespace RentEquipment.Windows
             cmbRole.SelectedItem = "0";
             IsEdit = false;
         }
-        public StaffAddWindow(EF.Staff staff)
+        public AddStaffWindow(EF.Staff staff)
         {
             InitializeComponent();
             IsEdit = true;
@@ -50,7 +50,7 @@ namespace RentEquipment.Windows
             txtPassword.Text = staff.Password;
             cmbRole.SelectedIndex = staff.IDRole-1;
             editStaff = staff;
-            if(staff.Photo != null)
+            if(staff.Photo != null)  
             {
             using (MemoryStream stream = new MemoryStream(staff.Photo))
             {
@@ -176,6 +176,10 @@ namespace RentEquipment.Windows
                     newstaff.IDRole = (cmbRole.SelectedItem as EF.Role).ID;
                     newstaff.Login = txtLogin.Text;
                     newstaff.Password = txtPassword.Text;
+                    if (photostrl != null)
+                    { 
+                    newstaff.Photo = File.ReadAllBytes(photostrl);
+                    }
                     ClassHelper.AppData.Context.Staff.Add(newstaff);
                     ClassHelper.AppData.Context.SaveChanges();
                     MessageBox.Show("Пользователь добавлен");

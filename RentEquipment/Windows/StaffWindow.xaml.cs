@@ -35,8 +35,8 @@ namespace RentEquipment.Windows
 
         private void btnStaffAdd_Click(object sender, RoutedEventArgs e)
         {
-            StaffAddWindow staffAddWindow = new StaffAddWindow();
-            staffAddWindow.ShowDialog();
+            AddStaffWindow addStaffWindow = new AddStaffWindow();
+            addStaffWindow.ShowDialog();
             lvStaff.ItemsSource = ClassHelper.AppData.Context.Staff.ToList();
             Filter();
         }
@@ -125,8 +125,8 @@ namespace RentEquipment.Windows
         {
             if (lvStaff.SelectedItem is EF.Staff)
             {   var stf = lvStaff.SelectedItem as EF.Staff;
-                StaffAddWindow staffAddWindow = new StaffAddWindow(stf);
-                staffAddWindow.ShowDialog();
+                AddStaffWindow addStaffWindow = new AddStaffWindow(stf);
+                addStaffWindow.ShowDialog();
                 Filter();
                 
             }

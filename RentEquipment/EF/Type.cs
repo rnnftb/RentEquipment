@@ -22,7 +22,7 @@ namespace RentEquipment.EF
     
         public int ID { get; set; }
         public string NameType { get; set; }
-        public byte[] ImageType { get; set; }
+        public byte[] PhotoType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }

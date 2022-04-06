@@ -1,19 +1,78 @@
-﻿<Window x:Class="RentEquipment.Windows.StaffAddWindow"
+﻿<Window x:Class="RentEquipment.Windows.AddClientWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RentEquipment.Windows"
         mc:Ignorable="d"
-        Title="StaffAddWindow" Height="450" Width="500" WindowStartupLocation="CenterScreen"
+        Title="Клиент" Height="450" Width="500" WindowStartupLocation="CenterScreen"
         MinHeight="500" MinWidth="450">
-    <Grid>
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="Yellow"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="#161a1e" CornerRadius="10" BorderBrush="#1e1112" BorderThickness="5" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid
+        Background="#264653">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="160"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -31,7 +90,8 @@
                    VerticalAlignment="Center"
                    FontSize="20"
                    x:Name="tbTitle"
-                   Text="Добавление сотрудников"
+                   Text="Добавление Клиента"
+                   Foreground="Yellow"
             ></TextBlock>
         <TextBlock
             Text="Фамилия"
@@ -41,6 +101,7 @@
             VerticalAlignment="Center"
             Margin="10 0"
             FontSize="16"
+            Foreground="Yellow"
             ></TextBlock>
         <TextBlock
             Text="Имя"
@@ -50,6 +111,7 @@
             VerticalAlignment="Center"
             Margin="10 0"
             FontSize="16"
+            Foreground="Yellow"
             ></TextBlock>
         <TextBlock
             Text="Отчество"
@@ -59,6 +121,7 @@
             VerticalAlignment="Center"
             Margin="10 0"
             FontSize="16"
+            Foreground="Yellow"
             ></TextBlock>
         <TextBlock
             Text="Телефон"
@@ -68,6 +131,7 @@
             VerticalAlignment="Center"
             Margin="10 0"
             FontSize="16"
+            Foreground="Yellow"
             ></TextBlock>
         <TextBlock
             Text="Email"
@@ -77,42 +141,57 @@
             VerticalAlignment="Center"
             Margin="10 0"
             FontSize="16"
+            Foreground="Yellow"
             ></TextBlock>
         <TextBlock
-            Text="Роль"
+            Text="Пол"
             Grid.Column="0"
             Grid.Row="6"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Margin="10 0"
             FontSize="16"
+            Foreground="Yellow"
             ></TextBlock>
         <TextBlock
-            Text="Логин"
+            Text="День рождения"
             Grid.Column="0"
             Grid.Row="7"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Margin="10 0"
             FontSize="16"
+            Foreground="Yellow"
             ></TextBlock>
         <TextBlock
-            Text="Пароль"
+            Text="Паспорт"
             Grid.Column="0"
             Grid.Row="8"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Margin="10 0"
             FontSize="16"
+            Foreground="Yellow"
             ></TextBlock>
         <TextBlock
-            Text="Повторите пароль"
+            Text="Пароль"
             Grid.Column="0"
             Grid.Row="9"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Margin="10 0"
             FontSize="16"
+            Foreground="Yellow"
+            ></TextBlock>
+        <TextBlock
+            Text="Повторите пароль"
+            Grid.Column="0"
+            Grid.Row="10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Margin="10 0"
+            FontSize="16"
+            Foreground="Yellow"
             ></TextBlock>
         <TextBox
             x:Name="txtLastName"
@@ -175,7 +254,7 @@
             VerticalContentAlignment="Center"
             ></TextBox>
         <ComboBox
-            x:Name="cmbRole"
+            x:Name="cmbGender"
             Grid.Column="1"
             Grid.Row="6" 
             HorizontalAlignment="Left"
@@ -185,9 +264,8 @@
             Width="220"
             VerticalContentAlignment="Center"
             ></ComboBox>
-        <TextBox
-            MaxLength="50"
-            x:Name="txtLogin"
+        <DatePicker
+            x:Name="dpDateBirth"
             Grid.Column="1"
             Grid.Row="7" 
             HorizontalAlignment="Left"
@@ -196,10 +274,10 @@
             FontSize="16"
             Width="220"
             VerticalContentAlignment="Center"
-            ></TextBox>
+            ></DatePicker>
         <TextBox
             MaxLength="50"
-            x:Name="txtPassword"
+            x:Name="txtPasport"
             Grid.Column="1"
             Grid.Row="8" 
             HorizontalAlignment="Left"
@@ -211,7 +289,7 @@
             ></TextBox>
         <TextBox
             MaxLength="50"
-            x:Name="txtRepeatPassword"
+            x:Name="txtPassword"
             Grid.Column="1"
             Grid.Row="9" 
             HorizontalAlignment="Left"
@@ -221,9 +299,21 @@
             Width="220"
             VerticalContentAlignment="Center"
             ></TextBox>
+        <TextBox
+            MaxLength="50"
+            x:Name="txtRepeatPassword"
+            Grid.Column="1"
+            Grid.Row="10" 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="10 0"
+            FontSize="16"
+            Width="220"
+            VerticalContentAlignment="Center"
+            ></TextBox>
         <Border
             Grid.Column="1"
-            Grid.Row="10"
+            Grid.Row="11"
             Height="75"
             Width="250"
             Margin="5"
@@ -231,10 +321,10 @@
             Background="Gray"    
             >
             <Image x:Name="PhotoUser" Source="/Res/pzqL31fLlco.jpg" />
-            
+
         </Border>
         <Button x:Name="btnPhoto"
-                Grid.Row="10"
+                Grid.Row="11"
                 
                 Grid.Column="1"
                 Height="75"
@@ -244,13 +334,13 @@
                 Content=""
                 Background="{x:Null}"
             ></Button>
-        <Button x:Name="btnAdd"
-                Grid.Row="11"
+        <Button x:Name="btnAddClient"
+                Grid.Row="12"
                 Grid.ColumnSpan="2"
                 Width="150"
                 Height="30"
                 Content="Добавить"
-                Click="btnAdd_Click"
+                Click="btnAddClient_Click"
             ></Button>
     </Grid>
 </Window>

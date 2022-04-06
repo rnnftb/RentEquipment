@@ -1,12 +1,13 @@
-﻿<Window x:Class="RentEquipment.Windows.EquipExtAddWindow"
+﻿<Window x:Class="RentEquipment.Windows.AddEquipExtWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RentEquipment.Windows"
         mc:Ignorable="d"
-       Title="Выдача оборудования" Height="600" Width="1000" Background="#FF7C7C7C">
-    <Grid>
+      Title="Выдача оборудования" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid
+        Background="#264653">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
@@ -14,6 +15,7 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -71,6 +73,7 @@
         <TextBlock
             Grid.Row="5"
             Text="Выбрано:"
+            Foreground="Yellow"
             FontSize="24"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -78,6 +81,7 @@
         <TextBlock
             x:Name="txtStaff"
             Grid.Row="5"
+            Foreground="AliceBlue"
             Grid.Column="1"
             FontSize="24"
             HorizontalAlignment="Center"
@@ -87,6 +91,7 @@
             Grid.Row="5"
             Text="Выбрано:"
             Grid.Column="2"
+            Foreground="Yellow"
             FontSize="24"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
@@ -94,6 +99,7 @@
         <TextBlock
             x:Name="txtClient"
             Grid.Row="5"
+            Foreground="AliceBlue"
             Grid.Column="3"
             FontSize="24"
             HorizontalAlignment="Center"
@@ -103,12 +109,14 @@
             Grid.Row="5"
             Text="Выбрано:"
             Grid.Column="4"
+            Foreground="Yellow"
             FontSize="24"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             ></TextBlock>
         <TextBlock
             x:Name="txtEquip"
+            Foreground="AliceBlue"
             Grid.ColumnSpan="2"
             Grid.Row="5"
             Grid.Column="5"
@@ -179,30 +187,86 @@
         <Button
             x:Name="btnCancel"
             Grid.ColumnSpan="2"
-            Grid.Row="6"
+            Grid.Row="7"
             Grid.Column="0"
             Width="250"
             Height="50"
-            Background="DarkRed"
             FontSize="36"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Foreground="White"
             Content="Отмена" Click="btnCancel_Click"
             ></Button>
         <Button
             x:Name="btnAddExt"
             Grid.ColumnSpan="2"
-            Grid.Row="6"
+            Grid.Row="7"
             Grid.Column="5"
             Width="250"
             Height="50"
-            Background="DarkGreen"
             FontSize="36"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Foreground="White"
             Content="Выдать" Click="btnAddExt_Click"
             ></Button>
+        <DatePicker x:Name="dpStartUse"
+                    Grid.Row="6"
+                    Width="150"
+                    Grid.ColumnSpan="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="0 10 0 0"
+                    DatePicker.SelectedDateChanged="dpStartUse_SelectedDateChanged">
+        </DatePicker>
+        <TextBlock
+            Text ="Рассчётная стоимость: "
+            Grid.Row="6"
+                    Width="210"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Foreground="Yellow"
+            FontSize="20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="0 10 0 0"/>
+        <TextBlock
+            x:Name="txtTotalPrice"
+            Grid.Row="6"
+             Width="210"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Foreground="Yellow"
+            FontSize="20"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="0 10 0 0"/>
+        <TextBlock
+            Text="Дата выдачи"
+            Grid.Column="1"
+            Grid.Row="6"
+            Foreground="Yellow"
+            FontSize="20"
+            Margin="10"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Width="130"/>
+        <TextBlock
+            Text="Дата сдачи"
+            Grid.Column="1"
+            Grid.Row="6"
+            Foreground="Yellow"
+            FontSize="20"
+            Margin="10 60 10 10"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Width="130"/>
+        <DatePicker x:Name="dpEndUse"
+                    HorizontalAlignment="Left"
+                    Width="150"
+                    Grid.Row="6"
+                    Grid.ColumnSpan="3"
+                    VerticalAlignment="Top"
+                    Margin="0 60 0 0"
+                    DatePicker.SelectedDateChanged="dpEndUse_SelectedDateChanged">
+        </DatePicker>
     </Grid>
 </Window>

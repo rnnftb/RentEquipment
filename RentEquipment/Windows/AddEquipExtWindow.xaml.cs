@@ -17,7 +17,7 @@ namespace RentEquipment.Windows
     /// <summary>
     /// Логика взаимодействия для EquipExtAddWindow.xaml
     /// </summary>
-    public partial class EquipExtAddWindow : Window
+    public partial class AddEquipExtWindow : Window
     {
         //Данные для заполнения комбобоксов
 
@@ -37,11 +37,11 @@ namespace RentEquipment.Windows
         //костыль для проверки, -1 используется, т.к. такого id в базе не существует ни при каких условиях
         //Эти переменные необходимы для записи ID
 
-        private int IDstf =-1;
+        private int IDstf = -1;
         private int IDclt = -1;
         private int IDeqp = -1;
 
-        public EquipExtAddWindow()
+        public AddEquipExtWindow()
         {
             InitializeComponent();
             ClientFilter();
@@ -52,7 +52,7 @@ namespace RentEquipment.Windows
             lvEquip.ItemsSource = ClassHelper.AppData.Context.Product.ToList();
             cmbClientSort.ItemsSource = ListClientSort;
             cmbEquipSort.ItemsSource = ListEquip;
-            cmbStaffSort.ItemsSource= ListStaffSort;
+            cmbStaffSort.ItemsSource = ListStaffSort;
             cmbClientSort.SelectedIndex = 0;
             cmbEquipSort.SelectedIndex = 0;
             cmbStaffSort.SelectedIndex = 0;
@@ -61,7 +61,7 @@ namespace RentEquipment.Windows
         {
             List<EF.Staff> ListStaff = new List<EF.Staff>();
             ListStaff = ClassHelper.AppData.Context.Staff.Where(i => i.IsDeleted == false).ToList();
-            ListStaff = ListStaff.Where(i => 
+            ListStaff = ListStaff.Where(i =>
             i.LastName.ToLower().Contains(txtStaffSearch.Text.ToLower())).ToList();
             switch (cmbStaffSort.SelectedIndex)
             {
@@ -71,7 +71,7 @@ namespace RentEquipment.Windows
                 case 1:
                     ListStaff = ListStaff.OrderBy(i => i.IDRole).ToList();
                     break;
-     
+
                 default:
                     ListStaff = ListStaff.OrderBy(i => i.ID).ToList();
                     break;
@@ -82,8 +82,8 @@ namespace RentEquipment.Windows
         {
             List<EF.Client> ListClient = new List<EF.Client>();
             ListClient = ClassHelper.AppData.Context.Client.Where(i => i.IsDeleted == false).ToList();
-            ListClient = ListClient.Where(i => 
-            i.LastName.ToLower().Contains(txtClientSearch.Text.ToLower())||
+            ListClient = ListClient.Where(i =>
+            i.LastName.ToLower().Contains(txtClientSearch.Text.ToLower()) ||
             i.Passport.PassportNumber.Contains(txtClientSearch.Text)).ToList();
             switch (cmbClientSort.SelectedIndex)
             {
@@ -122,8 +122,6 @@ namespace RentEquipment.Windows
             }
             lvEquip.ItemsSource = ListEquip;
         }
-
-       
 
         private void txtStaffSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -182,6 +180,7 @@ namespace RentEquipment.Windows
             var eqp = lvEquip.SelectedItem as EF.Product;
             txtEquip.Text = eqp.NameProduct;
             IDeqp = eqp.ID;
+            TotalPrice();
         }
         private void btnAddExt_Click(object sender, RoutedEventArgs e)
         {
@@ -202,6 +201,31 @@ namespace RentEquipment.Windows
                 MessageBox.Show("Ошибка! Оборудование не выбрано", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (dpStartUse.SelectedDate == null)
+            {
+                MessageBox.Show("Ошибка! Дата выдачи не выбрана!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (dpStartUse.SelectedDate < DateTime.Today)
+            {
+                MessageBox.Show("Ошибка! Дата выдачи меньше текущего дня!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (dpEndUse.SelectedDate == null)
+            {
+                MessageBox.Show("Ошибка! Дата возврата не выбрана!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (dpEndUse.SelectedDate < DateTime.Today)
+            {
+                MessageBox.Show("Ошибка! Дата сдачи меньше текущего дня!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (dpStartUse.SelectedDate > dpEndUse.SelectedDate)
+            {
+                MessageBox.Show("Ошибка! Дата возврата не может быть раньше даты выдачи!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             var resClick = MessageBox.Show("Вы уверены?", "Подтвержение", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (resClick == MessageBoxResult.No)
             {
@@ -209,11 +233,14 @@ namespace RentEquipment.Windows
             }
             try
             {
-               EF.ClientProduct clientProduct = new EF.ClientProduct();
+                EF.ClientProduct clientProduct = new EF.ClientProduct();
                 clientProduct.IDProduct = IDeqp;
                 clientProduct.IDClient = IDclt;
                 clientProduct.IDStaff = IDstf;
                 clientProduct.DateOfIssue = DateTime.Now; //взятие текущей системной даты
+                clientProduct.DateStart = Convert.ToDateTime(dpStartUse.SelectedDate) + DateTime.Now.TimeOfDay;
+                clientProduct.DateEnd = Convert.ToDateTime(dpEndUse.SelectedDate) + DateTime.Now.TimeOfDay;
+                clientProduct.TotalPrice = Convert.ToDecimal(txtTotalPrice.Text);
                 ClassHelper.AppData.Context.ClientProduct.Add(clientProduct);
                 ClassHelper.AppData.Context.SaveChanges();
                 MessageBox.Show("Запись добавлена");
@@ -222,6 +249,41 @@ namespace RentEquipment.Windows
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+        public void TotalPrice()
+        {
+            if (dpStartUse.SelectedDate != null && dpEndUse.SelectedDate != null && txtEquip.Text != null)
+            {
+
+                if (dpStartUse.SelectedDate < DateTime.Today && dpEndUse.SelectedDate < DateTime.Today)
+                {
+                    MessageBox.Show("Не правильно введена дата начала или конца", "Ошибка",
+                               MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+                else
+                {
+                    var eqp = lvEquip.SelectedItem as EF.Product;
+                    double b = Convert.ToDouble(eqp.Price);
+                    DateTime dateStart = DateTime.Parse(Convert.ToString(dpStartUse.SelectedDate));
+                    DateTime dateEnd = DateTime.Parse(Convert.ToString(dpEndUse.SelectedDate));
+                    string daySubtrut = Convert.ToString(dateEnd.Subtract(dateStart));
+                    string[] daySplit = daySubtrut.Split(new char[] { '.' });
+                    double totalPrice = Convert.ToDouble(daySplit[0]) * ((b * 5) / 100);
+                    txtTotalPrice.Text = totalPrice.ToString();
+                }
+
+            }
+        }
+
+        private void dpStartUse_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TotalPrice();
+        }
+
+        private void dpEndUse_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TotalPrice();
         }
     }
 }

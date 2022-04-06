@@ -19,15 +19,36 @@ namespace RentEquipment.Windows
     /// </summary>
     public partial class EquipListWindow : Window
     {
+        List<string> ListSort = new List<string>()
+    {
+        "По умолчанию","По имени","По ID"
+    };
         public EquipListWindow()
         {
             InitializeComponent();
+            Filter();
             lvEquipList.ItemsSource = ClassHelper.AppData.Context.Product.ToList();
+            cmbSort.ItemsSource = ListSort;
+            cmbSort.SelectedIndex = 0;
         }
         private void Filter()
         {
             List<EF.Product> listEquip = new List<EF.Product>();
             listEquip = ClassHelper.AppData.Context.Product.Where(i => i.IsDeleted == false).ToList();
+
+            //Фильтрация
+            listEquip = listEquip.Where(i =>
+            i.NameProduct.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
+
+            switch (cmbSort.SelectedIndex)
+            {
+                case 0:
+                    listEquip = listEquip.OrderBy(i => i.NameProduct).ToList();
+                    break;
+                default:
+                    listEquip = listEquip.OrderBy(i => i.ID).ToList();
+                    break;
+            }
             lvEquipList.ItemsSource = listEquip;
         }
 
@@ -44,9 +65,9 @@ namespace RentEquipment.Windows
                         {
                             return;
                         }
-                        var stf = lvEquipList.SelectedItem as EF.Product;
+                        var eqp = lvEquipList.SelectedItem as EF.Product;
                         //ClassHelper.AppData.Context.Product.Remove(stf);
-                        stf.IsDeleted = true;
+                        eqp.IsDeleted = true;
                         ClassHelper.AppData.Context.SaveChanges();
                         MessageBox.Show("Оборудование успешно удалено", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
                         Filter();
@@ -57,6 +78,64 @@ namespace RentEquipment.Windows
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
+        }
+
+        private void lvEquipList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lvEquipList.SelectedItem is EF.Product)
+            {
+                var eqp = lvEquipList.SelectedItem as EF.Product;
+                AddEquipWindow addEquipWindow = new AddEquipWindow(eqp);
+                addEquipWindow.ShowDialog();
+                Filter();
+
+            }
+        }
+
+        private void lvEquipList_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete || e.Key == Key.Back)
+            {
+                try
+                {
+                    if (lvEquipList.SelectedItem is EF.Product)
+                    {
+                        var resmsg = MessageBox.Show("Удалить продукт?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (resmsg == MessageBoxResult.No)
+                        {
+                            return;
+                        }
+                        var eqp = lvEquipList.SelectedItem as EF.Product;
+                        eqp.IsDeleted = true;
+                        ClassHelper.AppData.Context.SaveChanges();
+                        MessageBox.Show("Продукт успешно удален", "Удаление", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Filter();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cmbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void btnStaffAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+            AddEquipWindow addEquipWindow = new AddEquipWindow();
+            addEquipWindow.ShowDialog();
+            lvEquipList.ItemsSource = ClassHelper.AppData.Context.Product.ToList();
+            Filter();
         }
     }
 }

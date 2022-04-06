@@ -19,6 +19,7 @@
           <Property Name="DateOfBirth" Type="date" Nullable="false" />
           <Property Name="IDGender" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ClientProduct">
           <Key>
@@ -30,6 +31,9 @@
           <Property Name="DateOfIssue" Type="datetime" Nullable="false" />
           <Property Name="IDProduct" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateStart" Type="datetime" Nullable="false" />
+          <Property Name="DateEnd" Type="datetime" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
@@ -72,6 +76,7 @@
           <Property Name="Warranty" Type="date" Nullable="false" />
           <Property Name="IDStatus" Type="int" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -119,7 +124,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameType" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="ImageType" Type="varbinary(max)" />
+          <Property Name="PhotoType" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Client_Gender">
           <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
@@ -394,6 +399,7 @@
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IDGender" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Gender" Relationship="RentEquipmentModel.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
           <NavigationProperty Name="Passport" Relationship="RentEquipmentModel.FK_Client_Passport" FromRole="Client" ToRole="Passport" />
           <NavigationProperty Name="ClientProduct" Relationship="RentEquipmentModel.FK_ClientProduct_Client" FromRole="Client" ToRole="ClientProduct" />
@@ -408,6 +414,9 @@
           <Property Name="DateOfIssue" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IDProduct" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="Client" Relationship="RentEquipmentModel.FK_ClientProduct_Client" FromRole="ClientProduct" ToRole="Client" />
           <NavigationProperty Name="Product" Relationship="RentEquipmentModel.FK_ClientProduct_Product" FromRole="ClientProduct" ToRole="Product" />
           <NavigationProperty Name="Staff" Relationship="RentEquipmentModel.FK_ClientProduct_Staff" FromRole="ClientProduct" ToRole="Staff" />
@@ -440,6 +449,7 @@
           <Property Name="Warranty" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IDStatus" Type="Int32" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="ClientProduct" Relationship="RentEquipmentModel.FK_ClientProduct_Product" FromRole="Product" ToRole="ClientProduct" />
           <NavigationProperty Name="Status" Relationship="RentEquipmentModel.FK_Product_Status" FromRole="Product" ToRole="Status" />
           <NavigationProperty Name="Type" Relationship="RentEquipmentModel.FK_Product_Type" FromRole="Product" ToRole="Type" />
@@ -494,7 +504,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameType" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ImageType" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhotoType" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Product" Relationship="RentEquipmentModel.FK_Product_Type" FromRole="Type" ToRole="Product" />
         </EntityType>
         <EntityType Name="History">
@@ -622,6 +632,7 @@
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="RentEquipmentModel.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="IDGender" ColumnName="IDGender" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
@@ -638,6 +649,9 @@
           <EntitySetMapping Name="ClientProduct">
             <EntityTypeMapping TypeName="RentEquipmentModel.ClientProduct">
               <MappingFragment StoreEntitySet="ClientProduct">
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
                 <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
@@ -667,6 +681,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="RentEquipmentModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="IDStatus" ColumnName="IDStatus" />
                 <ScalarProperty Name="Warranty" ColumnName="Warranty" />
@@ -724,7 +739,7 @@
           <EntitySetMapping Name="Type">
             <EntityTypeMapping TypeName="RentEquipmentModel.Type">
               <MappingFragment StoreEntitySet="Type">
-                <ScalarProperty Name="ImageType" ColumnName="ImageType" />
+                <ScalarProperty Name="PhotoType" ColumnName="PhotoType" />
                 <ScalarProperty Name="NameType" ColumnName="NameType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

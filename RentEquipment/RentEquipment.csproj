@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClassHelper\ClientList.cs" />
     <Compile Include="ClassHelper\Staff.cs" />
     <Compile Include="EF\Client.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -113,11 +114,17 @@
     <Compile Include="EF\Type.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Windows\EquipExtAddWindow.xaml.cs">
-      <DependentUpon>EquipExtAddWindow.xaml</DependentUpon>
+    <Compile Include="Windows\AddClientWindow.xaml.cs">
+      <DependentUpon>AddClientWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\StaffAddWindow.xaml.cs">
-      <DependentUpon>StaffAddWindow.xaml</DependentUpon>
+    <Compile Include="Windows\AddEquipExtWindow.xaml.cs">
+      <DependentUpon>AddEquipExtWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddEquipWindow.xaml.cs">
+      <DependentUpon>AddEquipWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AddStaffWindow.xaml.cs">
+      <DependentUpon>AddStaffWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\StaffWindow.xaml.cs">
       <DependentUpon>StaffWindow.xaml</DependentUpon>
@@ -125,6 +132,14 @@
     <Compile Include="Windows\Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
+    <Page Include="Windows\AddClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AddEquipWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AuthWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,7 +152,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\EquipExtAddWindow.xaml">
+    <Page Include="Windows\AddEquipExtWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,7 +192,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\StaffAddWindow.xaml">
+    <Page Include="Windows\AddStaffWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
